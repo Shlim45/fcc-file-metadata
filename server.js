@@ -19,9 +19,8 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
 app.post('/file', upload.single('avatar'), function (req, res) {
-  console.log(req.file);
+  console.log(req.body);
   res.redirect("/");
 });
 
