@@ -2,8 +2,8 @@ var express = require('express');
 var multer = require('multer');
 var cors = require('cors');
 
-const UPLOAD_PATH = 'uploads';
-const upload = multer({ dest: `${UPLOAD_PATH}/` }); // multer configuration
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage });
 
 var app = express();
 
@@ -20,7 +20,7 @@ app.get("/", function (req, res) {
 });
 
 // could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-app.post('/file', upload.single('avatar'), function (req, res) {
+app.post('/file', upload('myFile'), function (req, res) {
   console.log(req.file);
   res.redirect("/");
 });
