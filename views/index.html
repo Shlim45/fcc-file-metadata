@@ -35,18 +35,19 @@
         form.addEventListener('submit', function(e) {
           e.preventDefault();
           
-          const file = form.querySelector('[type="file"]');
+          const file = form.querySelector('[type="file"]').files[0];
 
-          console.log(file.value);
+          console.log(file);
           
-          fetch('/file', {
-            method: "POST",
-            body: {
-              myFile: file.value
-            }
-          })
-            .then(data => console.log(data))
-            .catch(err => console.error(err));
+          // fetch('/file', {
+          //   method: "POST",
+          //   body: {
+          //     myFile: file
+          //   },
+          // })
+          //   // .then(response => response.json())
+          //   .then(data => console.log(data))
+          //   .catch(err => console.error(err));
         });
       });
     </script>
