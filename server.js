@@ -3,7 +3,6 @@ var multer = require('multer');
 var cors = require('cors');
 
 var storage = multer.memoryStorage();
-// var upload = multer({ storage });
 
 var app = express();
 
@@ -21,12 +20,16 @@ app.get("/", function (req, res) {
 
 // upload to memory and limit file size to 100MB
 app.post('/', function (req, res) {
-  const limit = 104857600;
-  const upload = multer({ storage, limits: { fileSize: limit } }).single('myFile');
+  const maxFileSize = 104857600;
+  const upload = multer({ storage, limits: { fileSize: maxFileSize } }).single('myFile');
+  
+  function convertToMB(bytes) {
+    return Math.round(bytes/(1024 * 1024));
+  }
   
   upload(req, res, function (err) {
     if (err) {  // file size too large      convert from bytes to megabytes
-      const error = `file size over ${Math.round(limit/(1024 * 1024))}MB`;
+      const error = `file size over ${convertToMB(maxFileSize)}MB`;
       res.json({ error });
       console.error(err);
       return;

@@ -19,36 +19,9 @@
     <main>
       <form id="upload" enctype="multipart/form-data" action="/" method="POST">
         <label for="myFile">Select a file <strong>less than</strong> 100MB:</label>
-        <input type="file" id="myFile" name="myFile" />
+        <input type="file" id="myFile" name="myFile" required />
         <button type="submit">Upload</button>
       </form>
-      
-      <section class="file-info">
-        
-      </section>
     </main>
-    
-<!--     <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const form = document.querySelector('#upload');
-        
-        form.addEventListener('submit', function(e) {
-          e.preventDefault(); // prevent page reload
-          
-          const file = form.querySelector('[type="file"]').files[0];
-          if (!file) return; 
-
-          const fileInfo = document.createElement('div');
-          fileInfo.classList.add('output');
-          fileInfo.innerHTML = "FILE NAME: <em>" + file.name + "</em><br>FILE SIZE: <em>" + file.size + " bytes</em>.";
-          
-          form.reset();
-          
-          const fileOutput = document.querySelector('.file-info');
-          fileOutput.innerHTML = ""; // clear out before updating
-          fileOutput.appendChild(fileInfo);
-        });
-      });
-    </script> -->
   </body>
 </html>
