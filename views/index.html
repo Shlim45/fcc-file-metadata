@@ -23,7 +23,7 @@
         <button type="submit">Upload</button>
       </form>
       
-      <section class="file-info hidden">
+      <section class="file-info">
         
       </section>
     </main>
@@ -37,17 +37,17 @@
           
           const file = form.querySelector('[type="file"]').files[0];
 
-          console.log(file);
+          // console.log(file);
+          // alert('FILE SIZE: ' + file.size);
+          const fileInfo = document.createElement('div');
+          fileInfo.classList.add('output');
+          fileInfo.textContent = "FILE SIZE: " + file.size + " bytes.";
           
-          // fetch('/file', {
-          //   method: "POST",
-          //   body: {
-          //     myFile: file
-          //   },
-          // })
-          //   // .then(response => response.json())
-          //   .then(data => console.log(data))
-          //   .catch(err => console.error(err));
+          file.clear();
+          
+          const fileOutput = document.querySelector('.file-info');
+          fileOutput.innerHTML = "";
+          fileOutput.appendChild(fileInfo);
         });
       });
     </script>
