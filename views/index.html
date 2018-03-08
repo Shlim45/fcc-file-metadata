@@ -33,20 +33,19 @@
         const form = document.querySelector('#upload');
         
         form.addEventListener('submit', function(e) {
-          e.preventDefault();
+          e.preventDefault(); // prevent page reload
           
           const file = form.querySelector('[type="file"]').files[0];
+          if (!file) return; 
 
-          // console.log(file);
-          // alert('FILE SIZE: ' + file.size);
           const fileInfo = document.createElement('div');
           fileInfo.classList.add('output');
-          fileInfo.textContent = "FILE SIZE: " + file.size + " bytes.";
+          fileInfo.innerHTML = "FILE NAME: <em>" + file.name + "</em><br>FILE SIZE: <em>" + file.size + " bytes</em>.";
           
-          file.clear();
+          form.reset();
           
           const fileOutput = document.querySelector('.file-info');
-          fileOutput.innerHTML = "";
+          fileOutput.innerHTML = ""; // clear out before updating
           fileOutput.appendChild(fileInfo);
         });
       });
