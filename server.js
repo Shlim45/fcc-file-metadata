@@ -21,11 +21,18 @@ app.get("/", function (req, res) {
 
 // upload to memory and limit file size to 100MB
 app.post('/', function (req, res) {
-  const upload = multer({ storage, limits: { fileSize: 104857600 } }).single('myFile');
+  const limit = 104857600;
+  const upload = multer({ storage, limits: { fileSize: limit } }).single('myFile');
   
   upload(req, res, function (err) {
-    if (err) {
-      res.json({"error":"file size over 100MB"});
+    if (err) {  // file size too large      convert from bytes to megabytes
+      const error = `file size over ${Math.round(limit/(1024 * 1024))}MB`;
+      res.json({ error });
+      console.error(err);
+      return;
+    }
+    if (!req.file) { // blank form submitted
+      res.redirect('/');
       return;
     }
     const { size } = req.file;
