@@ -1,5 +1,9 @@
 var express = require('express');
+var multer = require('multer');
 var cors = require('cors');
+
+var storage = multer.memoryStorage();
+// var upload = multer({ storage });
 
 var app = express();
 
@@ -13,6 +17,11 @@ app.use(express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
+});
+
+app.post('/', multer({ storage }).single('myFile'), function (req, res) {
+  const { size } = req.file;
+  res.json({size});
 });
 
 // listen for requests :)
